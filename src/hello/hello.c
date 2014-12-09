@@ -22,8 +22,6 @@ int say_hello(int n)
 	return 0;
 }
 
-EXPORT_SYMBOL(say_hello);
-
 static int init_hello(void)
 {
 	printk(KERN_ALERT "hello module: Hello, module is init! param N is :%d \n", N);
@@ -35,6 +33,10 @@ static void exit_hello(void)
 	printk(KERN_ALERT "Hello module: Goodbye! module exit.\n");
 }
 
+//here is the export symbol 
+EXPORT_SYMBOL(say_hello);
+
+//here is the module init/exit
 module_init(init_hello);
 module_exit(exit_hello);
 

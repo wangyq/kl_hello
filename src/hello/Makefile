@@ -1,3 +1,4 @@
+
 TARGET=hello
 KVER=$(shell uname -r)
 KDIR=/lib/modules/$(KVER)/build
@@ -21,6 +22,7 @@ clean:
 	-rm *.o
 	-rm -f Mo.*
 	-rm *.mod.*
-
+	-rm *.order
+	-rm *.symvers
 ##	make -C $(KDIR) M=$(PWD) clean
 
