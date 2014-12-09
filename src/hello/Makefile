@@ -3,9 +3,9 @@ TARGET=hello
 KVER=$(shell uname -r)
 KDIR=/lib/modules/$(KVER)/build
 PWD=$(shell pwd)
-obj-m +=$(TARGET).o
+obj-m += $(TARGET).o
 
-default:
+all:
 	make -C $(KDIR) M=$(PWD) modules
 
 .PHONY:install
@@ -18,11 +18,12 @@ uninstall:
 
 .PHONY:clean
 clean:
-	-rm *.ko
-	-rm *.o
-	-rm -f Mo.*
-	-rm *.mod.*
-	-rm *.order
-	-rm *.symvers
+	make -C $(KDIR) M=$(PWD) clean
+#	-rm *.ko
+#	-rm *.o
+#	-rm -f Mo.*
+#	-rm *.mod.*
+#	-rm *.order
+#	-rm *.symvers
 ##	make -C $(KDIR) M=$(PWD) clean
 

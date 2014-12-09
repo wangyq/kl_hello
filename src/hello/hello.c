@@ -3,9 +3,9 @@
 #define MODULE
 #endif
 
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/moduleparam.h>
+#include <linux/module.h>      // Needed by all modules
+#include <linux/kernel.h>      // Needed for KERN_INFO
+#include <linux/moduleparam.h> // Needed for module_param
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("yinqingwang@gmail.com");
@@ -24,7 +24,9 @@ int say_hello(int n)
 
 static int init_hello(void)
 {
-	printk(KERN_ALERT "hello module: Hello, module is init! param N is :%d \n", N);
+	printk(KERN_ALERT "Hello module: Hello, module is init! param N is :%d \n", N);
+
+	//A non 0 return means init_module failed; module can't be loaded.
 	return 0;
 }
 
