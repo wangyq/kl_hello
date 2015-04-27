@@ -1,5 +1,5 @@
 
-TARGET=hello
+TARGET=proc_hello
 KVER=$(shell uname -r)
 KDIR=/lib/modules/$(KVER)/build
 PWD=$(shell pwd)
