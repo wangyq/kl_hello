@@ -106,8 +106,8 @@ static int procfile_read(char *buffer,
   return len;
 }
 
-struct proc_dir_entry *hello_proc_dir;
-struct proc_dir_entry *hello_proc_file;
+struct proc_dir_entry *hello_proc_dir = NULL;
+struct proc_dir_entry *hello_proc_file = NULL;
 
 /* Initialize the module - register the proc file */
 static int init_hello_module(void)
@@ -136,7 +136,8 @@ static int init_hello_module(void)
 
 static void exit_hello_module(void)
 {
-	proc_remove(hello_proc_dir);
+	if( NULL != hello_proc_dir)
+		proc_remove(hello_proc_dir);
 
 	printk(KERN_ALERT "Hello Proc module: Goodbye! module exit.\n");
 }
