@@ -60,6 +60,7 @@ MODULE_DESCRIPTION("This is a hello module!");
    advantage of having the kernel source code for 
    free - use it.
  */
+#if 0
 static int procfile_read(char *buffer, 
 		  char **buffer_location, 
 		  off_t offset, 
@@ -105,6 +106,7 @@ static int procfile_read(char *buffer,
   /* Return the length */
   return len;
 }
+#endif
 
 struct proc_dir_entry *hello_proc_dir = NULL;
 struct proc_dir_entry *hello_proc_file = NULL;
