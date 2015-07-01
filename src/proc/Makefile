@@ -22,10 +22,12 @@ all:
 .PHONY:install
 install:
 	insmod $(TARGET).ko
+	dmesg | tail -n 10
 
 .PHONY:uninstall
 uninstall:
 	rmmod $(TARGET)
+	dmesg | tail -n 10
 
 .PHONY:clean
 clean:
