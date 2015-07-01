@@ -46,21 +46,21 @@ static struct proc_dir_entry *hello_proc_file = NULL;
 /* Initialize the module - register the proc file */
 static int init_hello_module(void)
 {
-	printk(KERN_ALERT "Hello Proc module: Hello, module is init! \n");
+    printk(KERN_ALERT "Hello Proc module: Hello, module is init! \n");
     
-	hello_proc_dir = proc_mkdir("hello",NULL);
+    hello_proc_dir = proc_mkdir("hello",NULL);
     if( hello_proc_dir ){
         //0 (zero) means default value of file permissions of 0444
         //hello_proc_file = proc_create("hello", 0, NULL, &hello_proc_fops);
         hello_proc_file = proc_create("hello", 0, hello_proc_dir, &hello_proc_fops);
-	
-        if( hello_proc_file == NULL){
-            proc_remove( hello_proc_dir );  //
+
+        if( ! hello_proc_file ){
+            proc_remove( hello_proc_dir );  // remove the parent of "/hello/"
             printk("Cann't creat 'hello' in /proc. \n");
             return -1; 
         }
     }
-	
+
     //A non 0 return means init_module failed; module can't be loaded.
     return 0;
 }
