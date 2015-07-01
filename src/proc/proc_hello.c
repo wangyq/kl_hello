@@ -165,6 +165,7 @@ static int hello_proc_open(struct inode *inode, struct file *file)
 }
 
 static const struct file_operations hello_proc_fops = {
+    .owner      = THIS_MODULE,
     .open       = hello_proc_open,
     .read       = seq_read,
     .llseek     = seq_lseek,
@@ -193,6 +194,7 @@ static int init_hello_module(void)
 /* Remove the module */
 static void exit_hello_module(void)
 {
+    //remove_proc_entry("hello", NULL); this call is ok!
     proc_remove( hello_proc_file);
     printk(KERN_ALERT "Hello Proc module: Goodbye! module exit.\n");
 }
