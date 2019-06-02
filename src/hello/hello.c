@@ -27,7 +27,9 @@ int say_hello(int n)
 
 static int init_hello(void)
 {
-	printk(KERN_ALERT "Hello module: Hello, module is init! param N is :%d \n", N);
+	printk(KERN_ALERT "Inside the %s function.\n", __FUNCTION__);
+	
+    printk(KERN_ALERT "Hello module: Hello, module is init! param N is :%d \n", N);
 
     /** 测试通过current（struct task_struct）获取当前进程名字和进程号，需要头文件linux/sched.h  * 
      *  KERN_INFO相当于字符串""，即不显示任何内容，然而我们建议在程序中注明，以表示信息的   * 
@@ -41,6 +43,8 @@ static int init_hello(void)
 
 static void exit_hello(void)
 {
+	printk(KERN_ALERT "Inside the %s function.\n", __FUNCTION__);
+
 	printk(KERN_ALERT "Hello module: Goodbye! module exit.\n");
 }
 
