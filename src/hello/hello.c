@@ -7,6 +7,9 @@
 #include <linux/kernel.h>      // Needed for KERN_INFO
 #include <linux/moduleparam.h> // Needed for module_param
 
+#include <linux/sched.h>       // pointer of Process, current
+
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("yinqingwang@gmail.com");
 MODULE_DESCRIPTION("This is a hello module!");
@@ -26,7 +29,13 @@ static int init_hello(void)
 {
 	printk(KERN_ALERT "Hello module: Hello, module is init! param N is :%d \n", N);
 
-	//A non 0 return means init_module failed; module can't be loaded.
+    /** 测试通过current（struct task_struct）获取当前进程名字和进程号，需要头文件linux/sched.h  * 
+     *  KERN_INFO相当于字符串""，即不显示任何内容，然而我们建议在程序中注明，以表示信息的   * 
+     *  级别，使程序更为规范和可读 
+     */ 
+    printk(KERN_INFO "The Process is [%s], PID [%i]/n", current->comm,current->pid); 
+	
+    //A non 0 return means init_module failed; module can't be loaded.
 	return 0;
 }
 
